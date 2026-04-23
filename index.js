@@ -1,13 +1,13 @@
-const { 
-  Client, 
-  GatewayIntentBits, 
-  EmbedBuilder, 
-  ActionRowBuilder, 
-  ButtonBuilder, 
-  ButtonStyle, 
-  ChannelType, 
-  PermissionsBitField 
-} = require('discord.js');
+const {
+  Client,
+  GatewayIntentBits,
+  EmbedBuilder,
+  ActionRowBuilder,
+  ButtonBuilder,
+  ButtonStyle,
+  ChannelType,
+  PermissionsBitField
+} = require("discord.js");
 
 const client = new Client({
   intents: [
@@ -20,22 +20,25 @@ const client = new Client({
 // 🔐 TOKEN z Railway Variables
 const TOKEN = process.env.TOKEN;
 
-// 👮 SEM DÁŠ ROLE ID VEDENIA
-const VEDENIE_ROLE_ID = "SEM_DAJ_ROLE_ID";
+// 👮 ROLE VEDENIA (SEM DÁŠ ID ROLE)
+const VEDENIE_ROLE_ID = "1489760336528675027";
 
-client.once('ready', () => {
-  console.log(`✅ Bot beží ako ${client.user.tag}`);
+// 📁 KATEGÓRIA VÝKUP OCELE (SEM DÁŠ CATEGORY ID)
+const CATEGORY_ID = "1496821115505479751";
+
+client.once("ready", () => {
+  console.log(`✅ Výkup bot beží ako ${client.user.tag}`);
 });
 
-// 📩 PANEL PRÍKAZ
-client.on('messageCreate', async (message) => {
+// 📩 PANEL
+client.on("messageCreate", async (message) => {
   if (message.author.bot) return;
 
   if (message.content === "!vykupsetup") {
 
     const embed = new EmbedBuilder()
       .setTitle("🏭 Výkup ocele")
-      .setDescription("Klikni na tlačidlo nižšie a vytvor žiadosť o výkup.")
+      .setDescription("Klikni na tlačidlo a vytvor žiadosť o výkup.")
       .setColor("Grey");
 
     const button = new ButtonBuilder()
@@ -45,12 +48,15 @@ client.on('messageCreate', async (message) => {
 
     const row = new ActionRowBuilder().addComponents(button);
 
-    await message.channel.send({ embeds: [embed], components: [row] });
+    await message.channel.send({
+      embeds: [embed],
+      components: [row]
+    });
   }
 });
 
 // 🎫 TICKET SYSTEM
-client.on('interactionCreate', async (interaction) => {
+client.on("interactionCreate", async (interaction) => {
   if (!interaction.isButton()) return;
 
   if (interaction.customId === "vykup_ticket") {
@@ -61,6 +67,9 @@ client.on('interactionCreate', async (interaction) => {
     const channel = await guild.channels.create({
       name: `vykup-${user.username}`,
       type: ChannelType.GuildText,
+
+      parent: CATEGORY_ID, // 🔥 TU IDE KATEGÓRIA
+
       permissionOverwrites: [
         {
           id: guild.id,
@@ -84,13 +93,15 @@ client.on('interactionCreate', async (interaction) => {
     });
 
     await channel.send(
-      `👋 <@${user.id}>  
-📦 Napíš koľko ocele máš  
-💰 Cena / info`
+      `👋 <@${user.id}>
+
+📦 Napíš koľko ocele máš
+💰 Tvoja cena / ponuka
+📝 poznámka`
     );
 
     await interaction.reply({
-      content: `✅ Ticket vytvorený: ${channel}`,
+      content: `✅ Vytvorený výkup ticket: ${channel}`,
       ephemeral: true
     });
   }

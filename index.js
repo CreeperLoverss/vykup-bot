@@ -105,10 +105,9 @@ client.on("interactionCreate", async (interaction) => {
       ]
     });
 
-    await channel.send(
-      `👋 <@${user.id}>
+    message.channel.send(`👋 <@${user.id}>`);
 
-📦 Napíš !vykup (množstvo ocele,ktoré nám chceš predať)
+📦 Napíš !vykup + (množstvo ocele,ktoré nám chceš predať)
                 (Náš pracovník hneď vyráta a ponukne sumu za výkup)
 
     );

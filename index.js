@@ -17,33 +17,33 @@ const client = new Client({
   ]
 });
 
-// 🔐 TOKEN z Railway Variables
+// 🔐 TOKEN (Railway Variable)
 const TOKEN = process.env.TOKEN;
 
-// 👮 ROLE VEDENIA (SEM DÁŠ ID ROLE)
+// 👮 ROLE VEDENIA
 const VEDENIE_ROLE_ID = "1489760336528675027";
 
-// 📁 KATEGÓRIA VÝKUP OCELE (SEM DÁŠ CATEGORY ID)
+// 📁 KATEGÓRIA VÝKUP OCELE
 const CATEGORY_ID = "1496821115505479751";
 
 client.once("ready", () => {
-  console.log(`✅ Výkup bot beží ako ${client.user.tag}`);
+  console.log(`✅ STEELCORE BOT ONLINE: ${client.user.tag}`);
 });
 
-// 📩 PANEL
+// 📩 PANEL PRÍKAZ
 client.on("messageCreate", async (message) => {
   if (message.author.bot) return;
 
   if (message.content === "!vykupsetup") {
 
     const embed = new EmbedBuilder()
-  .setTitle("🏭 STEELCORE INDUSTRIES")
-  .setDescription(`
-📦 VÝKUP OCELE
+      .setTitle("🏭 STEELCORE INDUSTRIES")
+      .setDescription(`
+📦 VÝKUP OCELE & PRIEMYSELNÝCH MATERIÁLOV
 
 ────────────────────────
 
-🧾 Oficiálny systém spracovania a výkupu materiálu spoločnosti SteelCore.
+🧾 Oficiálny systém spracovania a výkupu ocele spoločnosti SteelCore.
 
 ⏱️ Systém je aktívny 24/7  
 📊 Každá žiadosť je spracovaná vedením
@@ -52,7 +52,6 @@ client.on("messageCreate", async (message) => {
 
 👉 Klikni na tlačidlo nižšie a vytvor žiadosť o výkup.
 `)
-  .setColor("Grey");
       .setColor("Grey");
 
     const button = new ButtonBuilder()
@@ -82,7 +81,7 @@ client.on("interactionCreate", async (interaction) => {
       name: `vykup-${user.username}`,
       type: ChannelType.GuildText,
 
-      parent: CATEGORY_ID, // 🔥 TU IDE KATEGÓRIA
+      parent: CATEGORY_ID,
 
       permissionOverwrites: [
         {
@@ -115,7 +114,7 @@ client.on("interactionCreate", async (interaction) => {
     );
 
     await interaction.reply({
-      content: `✅ Vytvorený výkup ticket: ${channel}`,
+      content: `✅ Výkup žiadosť vytvorená: ${channel}`,
       ephemeral: true
     });
   }

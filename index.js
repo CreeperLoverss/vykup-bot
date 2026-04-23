@@ -37,8 +37,22 @@ client.on("messageCreate", async (message) => {
   if (message.content === "!vykupsetup") {
 
     const embed = new EmbedBuilder()
-      .setTitle("🏭 Výkup ocele")
-      .setDescription("Klikni na tlačidlo a vytvor žiadosť o výkup.")
+  .setTitle("🏭 STEELCORE INDUSTRIES")
+  .setDescription(`
+📦 VÝKUP OCELE
+
+────────────────────────
+
+🧾 Oficiálny systém spracovania a výkupu materiálu spoločnosti SteelCore.
+
+⏱️ Systém je aktívny 24/7  
+📊 Každá žiadosť je spracovaná vedením
+
+────────────────────────
+
+👉 Klikni na tlačidlo nižšie a vytvor žiadosť o výkup.
+`)
+  .setColor("Grey");
       .setColor("Grey");
 
     const button = new ButtonBuilder()

@@ -39,7 +39,7 @@ client.on("messageCreate", async (message) => {
     const embed = new EmbedBuilder()
       .setTitle("🏭 STEELCORE INDUSTRIES")
       .setDescription(`
-📦 VÝKUP OCELE & PRIEMYSELNÝCH MATERIÁLOV
+📦 VÝKUP OCELE
 
 ────────────────────────
 

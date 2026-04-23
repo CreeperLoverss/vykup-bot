@@ -108,9 +108,9 @@ client.on("interactionCreate", async (interaction) => {
     await channel.send(
       `👋 <@${user.id}>
 
-📦 Napíš koľko ocele máš
-💰 Tvoja cena / ponuka
-📝 poznámka`
+📦 Napíš !vykup (množstvo ocele,ktoré nám chceš predať)
+                (Náš pracovník hneď vyráta a ponukne sumu za výkup)
+
     );
 
     await interaction.reply({

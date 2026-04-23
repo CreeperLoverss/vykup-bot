@@ -80,7 +80,6 @@ client.on("interactionCreate", async (interaction) => {
     const channel = await guild.channels.create({
       name: `vykup-${user.username}`,
       type: ChannelType.GuildText,
-
       parent: CATEGORY_ID,
 
       permissionOverwrites: [
@@ -105,12 +104,11 @@ client.on("interactionCreate", async (interaction) => {
       ]
     });
 
-    message.channel.send(`👋 <@${user.id}>`);
+    await channel.send(`👋 <@${user.id}>
 
-📦 Napíš !vykup + (množstvo ocele,ktoré nám chceš predať)
-                (Náš pracovník hneď vyráta a ponukne sumu za výkup)
-
-    );
+📦 Napíš !vykup + množstvo ocele, ktoré chceš predať  
+💰 Náš pracovník ti následne ponúkne cenu
+`);
 
     await interaction.reply({
       content: `✅ Výkup žiadosť vytvorená: ${channel}`,

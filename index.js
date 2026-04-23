@@ -30,10 +30,11 @@ client.once("ready", () => {
   console.log(`✅ STEELCORE BOT ONLINE: ${client.user.tag}`);
 });
 
-// 📩 PANEL PRÍKAZ
+// 📩 MESSAGE COMMANDS
 client.on("messageCreate", async (message) => {
   if (message.author.bot) return;
 
+  // 🧾 SETUP PANEL
   if (message.content === "!vykupsetup") {
 
     const embed = new EmbedBuilder()
@@ -65,6 +66,28 @@ client.on("messageCreate", async (message) => {
       embeds: [embed],
       components: [row]
     });
+  }
+
+  // 💰 VÝKUP KALKULÁTOR
+  if (message.content.startsWith("!vykup ")) {
+
+    const args = message.content.split(" ");
+    const amount = parseInt(args[1]);
+
+    if (isNaN(amount)) {
+      return message.reply("❌ Použitie: `!vykup <množstvo>` (napr. !vykup 100)");
+    }
+
+    const pricePerUnit = 100;
+    const total = amount * pricePerUnit;
+
+    return message.reply(
+      `🏭 VÝKUP OCELE\n\n` +
+      `📦 Množstvo: **${amount} kusov**\n` +
+      `💰 Cena za kus: **$${pricePerUnit}**\n` +
+      `────────────────────\n` +
+      `💵 CELKOM: **$${total}**`
+    );
   }
 });
 
@@ -107,7 +130,7 @@ client.on("interactionCreate", async (interaction) => {
     await channel.send(`👋 <@${user.id}>
 
 📦 Napíš !vykup + množstvo ocele, ktoré chceš predať  
-💰 Náš pracovník ti následne ponúkne cenu
+💰 Cena: **$100 za kus**
 `);
 
     await interaction.reply({
